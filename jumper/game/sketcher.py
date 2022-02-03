@@ -1,9 +1,6 @@
-import random
 from game.words_service import Words
 class Sketcher:
-    """The person looking for the coincidence in the word. 
-    
-    The responsibility of a Seeker is to search for coincidences between the input for the player and the letters in the word to guess.
+    """The person drawing the parachute and hyphens with the coincidence in the word. 
     
     Attributes:
         letter (string): The letter entered (a-z).
@@ -16,16 +13,31 @@ class Sketcher:
         """
         self._word = Words()
 
-    def set_hyphens(self,woed,guess):
+    def set_hyphens(self,word):
         """Draws the hyphens of the current word.
         Returns:
             string: The current word,
         """
         word = self._word.get_word()
+        print()
         print(word)
+        for i in word:
+            print("_", end=" ")
+        print()
 
-    def set_paratrooper(self,guess):
-        pass
+    def set_parachute(self,guess):
+        """Draw the parachute every time
+        """
+        print()
+        print ("    ___   ")
+        print ("   /___\  ")
+        print ("   \   /  ")
+        print ("    \ /   ")
+        print ("     O    ")
+        print ("    /|\   ")
+        print ("    / \   ")
+        print ()
+        print (" ^^^^^^^^")
         
-    def is_clean(self):
+    def is_clean(self): 
         pass

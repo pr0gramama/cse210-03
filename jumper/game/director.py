@@ -10,9 +10,10 @@ class Director:
     The responsibility of a Director is to control the sequence of play.
 
     Attributes:
-        hider (Hider): The game's hider.
+        matcher (Matcher): The game's matcher, the letter in the word.
         is_playing (boolean): Whether or not to keep playing.
-        seeker (Seeker): The game's seeker.
+        words (Words): The word list handler
+        sketcher (Seeker): The game's sketcher, parachute and word.
         terminal_service: For getting and displaying information on the terminal.
     """
 
@@ -42,14 +43,14 @@ class Director:
             self._do_outputs()
 
     def _get_inputs(self):
-        """Moves the seeker to a new location.
+        """Draw the parachute, dashes and letters each time.
 
         Args:
             self (Director): An instance of Director.
         """
         word = self._words.get_word() #get the word from the list at the beginning of the game
-        self._sketcher.set_hyphens(word,self.guess) # dibuja los guiones de acuerdo a la cantindad de letras y al juego, debe guardar lista actualizada
-        self._sketcher.set_paratrooper(self.guess) # dibuja el paracaidista de acuerdo al juego anterior, debe guardar matriz actualizada
+        self._sketcher.set_hyphens(word) # dibuja los guiones de acuerdo a la cantindad de letras y al juego, debe guardar lista actualizada
+        self._sketcher.set_parachute(self.guess) # dibuja el paracaidista de acuerdo al juego anterior, debe guardar matriz actualizada
         self.letter = self._terminal_service.read_text("\nGuess a letter [a-z]: ") #pide una letra por pantalla y la guarda en atributo. Se usa get para obtenerlo
         
     def _do_updates(self):
