@@ -1,45 +1,44 @@
 
 class Matcher:
-    """The person hiding from the Seeker. 
-    
-    The responsibility of Hider is to keep track of its location and distance from the seeker. 
-    
+    """The person looking for the coincidence of the letter in the word. 
+        
     Attributes:
-        _location (int): The location of the hider (1-1000).
-        _distance (List[int]): The distance from the seeker.
+        
     """
 
     def __init__(self):
-        """Constructs a new Hider.
+        """Constructs a new Matcher.
 
         Args:
-            self (Hider): An instance of Hider.
+            self (Matcher): An instance of Matcher.
         """
         self._list = [] # start with 
     
     def get_match(self, list):
-        """Gets a hint for the seeker.
+        """Looks a matching.
 
         Args:
-            self (Hider): An instance of Hider.
+            self (Matcher): An instance of Matcher.
         
         Returns:
-            string: A hint for the seeker.
+            string: 
         """
         pass
         
 
     def is_found(self):
-        """Whether or not the hider has been found.
+        """Whether or not the total matching has been found.
 
         Args:
-            self (Hider): An instance of Hider.
+            self (Matcher): An instance of Matcher.
             
         Returns:
-            boolean: True if the hider was found; false if otherwise.
+            boolean: True if the matcher was found; false if otherwise.
         """
         return True
 
     def get_text(self):
+        """The text when the game end
+        """
         pass
         

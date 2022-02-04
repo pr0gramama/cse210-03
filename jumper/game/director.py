@@ -10,7 +10,7 @@ class Director:
     The responsibility of a Director is to control the sequence of play.
 
     Attributes:
-        matcher (Matcher): The game's matcher, the letter in the word.
+        matcher (Matcher): The game's skeeer matching letter in the word.
         is_playing (boolean): Whether or not to keep playing.
         words (Words): The word list handler
         sketcher (Seeker): The game's sketcher, parachute and word.
@@ -28,7 +28,7 @@ class Director:
         self._sketcher = Sketcher()
         self._matcher = Matcher()
         self._terminal_service = TerminalService()
-        self.letter = "" # no es privada
+        self.letter = "" 
         self.guess = []
         
     def start_game(self):
@@ -49,27 +49,27 @@ class Director:
             self (Director): An instance of Director.
         """
         word = self._words.get_word() #get the word from the list at the beginning of the game
-        self._sketcher.set_hyphens(word) # dibuja los guiones de acuerdo a la cantindad de letras y al juego, debe guardar lista actualizada
-        self._sketcher.set_parachute(self.guess) # dibuja el paracaidista de acuerdo al juego anterior, debe guardar matriz actualizada
-        self.letter = self._terminal_service.read_text("\nGuess a letter [a-z]: ") #pide una letra por pantalla y la guarda en atributo. Se usa get para obtenerlo
+        self._sketcher.set_hyphens(word) # draws the dashes according to the number of letters, musts keep an updated list
+        self._sketcher.set_parachute(self.guess) # draws the parachute according to the game, must save the updated matrix
+        self.letter = self._terminal_service.read_text("\nGuess a letter [a-z]: ") #asks for a letter on the screen and saves it in an attribute. A get function is used to get it
         
     def _do_updates(self):
-        """Keeps watch on where the seeker is moving.
+        """Check matching and change the lists, word and parachute.
 
         Args:
             self (Director): An instance of Director.
         """
-        self.guess = self._matcher.get_match(self.letter) # Busca si hay coincidencia y cambia la lista de palabras y la matriz del paracaidista
+        self.guess = self._matcher.get_match(self.letter)
         
     def _do_outputs(self):
-        """Provides a hint for the seeker to use.
+        """Ask for input on the screen. Post the appropriate message if win or lose.
 
         Args:
             self (Director): An instance of Director.
         """
-        text = self._matcher.get_text() # obtiene el mensaje adecuado si gano o perdio
-        self._terminal_service.write_text(text) # coloca el mensaje en pantalla
+        text = self._matcher.get_text()
+        self._terminal_service.write_text(text)
         if self._matcher.is_found():  #If the puzzle is solved the game is over.
             self._is_playing = False
-        if self._sketcher.is_clean(): # If the paratropper is clean the game is over
+        if self._sketcher.is_clean(): # If the parachute is clean the game is over
             self._is_playing = False

@@ -1,19 +1,18 @@
 import random
 class Words:
-    """The person looking for the coincidence in the word. 
-    
-    The responsibility of a Seeker is to search for coincidences between the input for the player and the letters in the word to guess.
+    """ 
+    Person who obtain a random word of the list
     
     Attributes:
         word (string): A word of the list.
     """
     def __init__(self):
-        """Constructs a new Seeker.
+        """Constructs a new Words.
 
         Args:
-            self (Seeker): An instance of Seeker.
+            self (Words): An instance of Seeker.
         """
-        list_words = ['battery', 'correct', 'horse', 'staple']
+        list_words = ['battery', 'correct', 'horse', 'staple'] # to add more words
         self._word = random.choice(list_words)
 
     def get_word(self):

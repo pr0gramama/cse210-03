@@ -1,6 +1,6 @@
 from game.words_service import Words
 class Sketcher:
-    """The person drawing the parachute and hyphens with the coincidence in the word. 
+    """The person drawing the parachute and hyphens acording to the coincidence in the word. 
     
     Attributes:
         letter (string): The letter entered (a-z).
@@ -43,5 +43,7 @@ class Sketcher:
         for i in range(len(self.parachute)):
             print(self.parachute[i])
         
-    def is_clean(self): 
+    def is_clean(self):
+        """ True when the parachute is all clean
+        """
         pass
