@@ -12,6 +12,17 @@ class Sketcher:
             self (Seeker): An instance of Seeker.
         """
         self._word = Words()
+        self.word_guess = []
+        self.parachute = ["    ___   ",
+                          "   /___\  ",
+                          "   \   /  ",
+                          "    \ /   ",
+                          "     O    ",
+                          "    /|\   ",
+                          "    / \   ",
+                          "          ",
+                          "^^^^^^^^^^",
+        ]
 
     def set_hyphens(self,word):
         """Draws the hyphens of the current word.
@@ -20,24 +31,17 @@ class Sketcher:
         """
         word = self._word.get_word()
         print()
-        print(word)
-        for i in word:
-            print("_", end=" ")
+        #print(word)
+        for i in range(len(word)):
+            self.word_guess.append("_")
+            print(self.word_guess[i], end=" ")
         print()
 
     def set_parachute(self,guess):
         """Draw the parachute every time
         """
-        print()
-        print ("    ___   ")
-        print ("   /___\  ")
-        print ("   \   /  ")
-        print ("    \ /   ")
-        print ("     O    ")
-        print ("    /|\   ")
-        print ("    / \   ")
-        print ()
-        print (" ^^^^^^^^")
+        for i in range(len(self.parachute)):
+            print(self.parachute[i])
         
     def is_clean(self): 
         pass
