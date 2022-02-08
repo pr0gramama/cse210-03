@@ -1,11 +1,12 @@
 import random
 
+
 class Matcher:
     """The user looking for the coincidence of the letter in the word. The responsibility
         of the matcher is to guess the correct word before the parachute (Sketcher) disappears.
-        
+
     Attributes:
-        
+
     """
 
     def __init__(self):
@@ -14,15 +15,20 @@ class Matcher:
         Args:
             self (Matcher): An instance of Matcher.
         """
-        list_words = random.choice(["dish", "chair", "cheese", "cat", "house", 
-            "car", "smell", "break", "seat", "ghost",])
+        list_words = random.choice(["dish", "chair", "cheese", "cat", "house",
+                                    "car", "smell", "break", "seat", "ghost", "album", "apple", "baker",
+                                    "beach", "bread", "close", "death", "dream", "error", "faith", "fruit",
+                                    "green", "happy", "human", "label", "learn", "lunch", "magic", "money",
+                                    "music", "night", "paint", "phone", "pride", "queen", "radio", "river",
+                                    "sleep", "smoke", "space", "sugar", "table", "tired", "train", "virus",
+                                    "woman", "world", "youth"])
         self._word = []
         for letter in list_words:
             self._word.append(letter)
 
         self.guesses = []
-        self._unknown_word = [] 
-    
+        self._unknown_word = []
+
     def set_hyphens(self):
         """ Loops through the letters in the word.  If the guesses is found in the word
         print that letter, otherwise set it to an underscore."""
@@ -34,7 +40,7 @@ class Matcher:
             else:
                 self._unknown_word.append("_")
         return self._unknown_word
-    
+
     def get_word(self, guess):
         self.guesses.append(guess)
 
@@ -43,15 +49,14 @@ class Matcher:
 
         Args:
             self (Matcher): An instance of Matcher.
-        
+
         Returns:
             string: 
         """
         if self._unknown_word == self._word:
-           return True 
+            return True
         else:
-           return False
-        
+            return False
 
     def is_found(self, guess):
         """If the guessed letter is found in the random word, return true, otherwise the 
@@ -59,7 +64,7 @@ class Matcher:
 
         Args:
             self (Matcher): An instance of Matcher.
-            
+
         Returns:
         boolean: True if the matcher was found; false if otherwise.
         """
@@ -69,11 +74,11 @@ class Matcher:
             else:
                 return False
 
-    def outcome(self, wrong, _unknown_word): # HELP! THIS IS NOT WORKING
+    def outcome(self, wrong, _unknown_word):  # HELP! THIS IS NOT WORKING
         """Gives the player 10 chances to guess the letters."""
         if wrong >= 10:
             return False
         elif _unknown_word == self._word:
             return True
-        else: 
+        else:
             return None
