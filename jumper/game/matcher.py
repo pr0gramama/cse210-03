@@ -75,8 +75,8 @@ class Matcher:
                 return False
 
     def outcome(self, wrong, _unknown_word):  # HELP! THIS IS NOT WORKING
-        """Gives the player 10 chances to guess the letters."""
-        if wrong >= 10:
+        """Gives the player 4 chances to guess the letters."""
+        if wrong >= 4:
             return False
         elif _unknown_word == self._word:
             return True
