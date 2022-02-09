@@ -1,6 +1,5 @@
 import random
-
-
+from game.sketcher import Sketcher
 class Matcher:
     """The user looking for the coincidence of the letter in the word. The responsibility
         of the matcher is to guess the correct word before the parachute (Sketcher) disappears.
@@ -22,12 +21,14 @@ class Matcher:
                                     "music", "night", "paint", "phone", "pride", "queen", "radio", "river",
                                     "sleep", "smoke", "space", "sugar", "table", "tired", "train", "virus",
                                     "woman", "world", "youth"])
-        self._word = []
+        self._word = [] 
         for letter in list_words:
             self._word.append(letter)
 
         self.guesses = []
         self._unknown_word = []
+        self.match = False
+        self._sketcher = Sketcher
 
     def set_hyphens(self):
         """ Loops through the letters in the word.  If the guesses is found in the word
@@ -67,16 +68,16 @@ class Matcher:
 
         Returns:
         boolean: True if the matcher was found; false if otherwise.
+
         """
         for letter in self._word:
             if letter == guess:
-                return True
-            else:
-                return False
+                self.match = True
+        return self.match
 
     def outcome(self, wrong, _unknown_word):  # HELP! THIS IS NOT WORKING
         """Gives the player 4 chances to guess the letters."""
-        if wrong >= 4:
+        if wrong >= 5:
             return False
         elif _unknown_word == self._word:
             return True

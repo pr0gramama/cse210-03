@@ -28,7 +28,7 @@ class Director:
         self._terminal_service = TerminalService()
         self._unknown_word = []  # container for unknown word chosen by random module -mary ann
         # supposed to add up wrong guesses.  Not working (Matcher: outcome)
-        self._wrong_guess = 1
+        self._wrong_guess = 0
         self.last_guess = ""  # most recent letter guessed by user
         # SEE Matcher function outcome.  This may be a problem.
         self.outcome = None
@@ -61,8 +61,14 @@ class Director:
             self (Director): An instance of Director.
         """
         self._unknown_word = self._matcher.set_hyphens()
-        if self._matcher.is_found(self.last_guess) == False:
+        print(self._unknown_word)
+        print(self._matcher._word) #it is only for control. Yuu can clean it
+        self._matcher.is_found(self._sketcher.guess)
+        if self._matcher.match:
+            self._matcher.match = False
+        else:
             self._wrong_guess += 1
+        self._sketcher.set_parachute(self._wrong_guess)
 
     def _do_outputs(self):
         """Ask for input on the screen. Post the appropriate message if win or lose.
@@ -70,7 +76,6 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        self._sketcher.set_parachute(self._wrong_guess)
         self._terminal_service.write_text(self._unknown_word)
 
         self._is_playing = (self._matcher.outcome(
