@@ -32,6 +32,9 @@ class Director:
         self.last_guess = ""  # most recent letter guessed by user
         # SEE Matcher function outcome.  This may be a problem.
         self.outcome = None
+        self.won = ""
+        self.lose = ""
+        self._get_match = False
 
     def start_game(self):
         """Starts the game by running the main game loop.
@@ -51,6 +54,12 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
+        self._unknown_word = self._matcher.set_hyphens()
+        print("The spaces are the number of letters:")
+        for i in self._unknown_word:
+            strip_quotes = i.strip()
+            print(strip_quotes, end=" ")
+        print()
         self.last_guess = self._sketcher.make_guess()
         self._matcher.get_word(self.last_guess)
 
@@ -60,14 +69,16 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        self._unknown_word = self._matcher.set_hyphens()
-        print(self._unknown_word)
+
+        
+        # print(self._unknown_word)
         print(self._matcher._word) #it is only for control. Yuu can clean it
         self._matcher.is_found(self._sketcher.guess)
         if self._matcher.match:
             self._matcher.match = False
         else:
             self._wrong_guess += 1
+        
         self._sketcher.set_parachute(self._wrong_guess)
 
     def _do_outputs(self):
@@ -76,7 +87,12 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        self._terminal_service.write_text(self._unknown_word)
+        result = self._get_match()
+        if result:
+            self.won = "You Win!"
+            self._terminal_service.write_text(self.won)
+        else:
+            self.won = "You lose."
 
         self._is_playing = (self._matcher.outcome(
             self._wrong_guess, self._unknown_word) == None)

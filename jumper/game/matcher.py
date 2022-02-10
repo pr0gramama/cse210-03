@@ -55,8 +55,10 @@ class Matcher:
             string: 
         """
         if self._unknown_word == self._word:
+            
             return True
         else:
+
             return False
 
     def is_found(self, guess):
@@ -75,7 +77,7 @@ class Matcher:
                 self.match = True
         return self.match
 
-    def outcome(self, wrong, _unknown_word):  # HELP! THIS IS NOT WORKING
+    def outcome(self, wrong, _unknown_word):
         """Gives the player 4 chances to guess the letters."""
         if wrong >= 5:
             return False
