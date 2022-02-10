@@ -62,7 +62,7 @@ class Director:
         """
         self._unknown_word = self._matcher.set_hyphens()
         print(self._unknown_word)
-        print(self._matcher._word) #it is only for control. Yuu can clean it
+        print(self._matcher._word) #it is only for control. Yuu can erase it
         self._matcher.is_found(self._sketcher.guess)
         if self._matcher.match:
             self._matcher.match = False
