@@ -56,8 +56,6 @@ class Sketcher:
         except TypeError as err:
             self._terminal_service.write_text(err)
 
-        
-
     def set_parachute(self, number):
         """Draw the parachute every time
         """
