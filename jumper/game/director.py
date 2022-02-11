@@ -39,6 +39,8 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
+        print("\n the word has as many letters as the hyphens:")
+        self._unknown_word = self._matcher.set_hyphens()
         self._sketcher.set_parachute(0)
         while self._is_playing:
             self._get_inputs()
@@ -61,7 +63,7 @@ class Director:
             self (Director): An instance of Director.
         """
         self._unknown_word = self._matcher.set_hyphens()
-        print(self._unknown_word)
+        print()
         print(self._matcher._word) #it is only for control. Yuu can erase it
         self._matcher.is_found(self._sketcher.guess)
         if self._matcher.match:
@@ -76,8 +78,6 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        self._terminal_service.write_text(self._unknown_word)
-
         self._is_playing = (self._matcher.outcome(
             self._wrong_guess, self._unknown_word) == None)
         if self._is_playing == False:

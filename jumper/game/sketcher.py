@@ -35,6 +35,7 @@ class Sketcher:
     def set_parachute(self, number):
         """Draw the parachute every time
         """
+        print()
         for i in range(number):
             self.parachute[i] = ""
         if number == 5:
@@ -45,7 +46,6 @@ class Sketcher:
 
     def get_text(self, won):
         """Prints the output for the end game, either "won" or "lost" """
- 
         if won == True:
             end_game = "You win!"
         else:
