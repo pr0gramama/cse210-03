@@ -32,6 +32,7 @@ class Director:
         self.last_guess = ""  # most recent letter guessed by user
         # SEE Matcher function outcome.  This may be a problem.
         self.outcome = None
+        self._lives = 5
 
     def start_game(self):
         """Starts the game by running the main game loop.
@@ -39,10 +40,10 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
-        print("\n the word has as many letters as the hyphens:")
+        print("\n The word has as many letters as the hyphens:")
         self._unknown_word = self._matcher.set_hyphens()
         self._sketcher.set_parachute(0)
-        while self._is_playing:
+        while self._is_playing and self._lives > 0:
             self._get_inputs()
             self._do_updates()
             self._do_outputs()
@@ -64,7 +65,7 @@ class Director:
         """
         self._unknown_word = self._matcher.set_hyphens()
         print()
-        print(self._matcher._word) #it is only for control. Yuu can erase it
+        # print(self._matcher._word) #it is only for control. Yuu can erase it
         self._matcher.is_found(self._sketcher.guess)
         if self._matcher.match:
             self._matcher.match = False
