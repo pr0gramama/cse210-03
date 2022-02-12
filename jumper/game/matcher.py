@@ -33,33 +33,21 @@ class Matcher:
     def set_hyphens(self):
         """ Loops through the letters in the word.  If the guesses is found in the word
         print that letter, otherwise set it to an underscore."""
-        self._unknown_word.clear
+        self._unknown_word.clear()
 
         for letter in self._word:
             if letter in self.guesses:
                 self._unknown_word.append(letter)
             else:
                 self._unknown_word.append("_")
+        
+        for letter in self._unknown_word:
+            print (letter, end = " ")
+
         return self._unknown_word
 
     def get_word(self, guess):
         self.guesses.append(guess)
-
-    def get_match(self):
-        """If the guessed word is the random word, return True, otherwise the word is wrong.
-
-        Args:
-            self (Matcher): An instance of Matcher.
-
-        Returns:
-            string: 
-        """
-        if self._unknown_word == self._word:
-            
-            return True
-        else:
-
-            return False
 
     def is_found(self, guess):
         """If the guessed letter is found in the random word, return true, otherwise the 
@@ -77,7 +65,7 @@ class Matcher:
                 self.match = True
         return self.match
 
-    def outcome(self, wrong, _unknown_word):
+    def outcome(self, wrong, _unknown_word): 
         """Gives the player 4 chances to guess the letters."""
         if wrong >= 5:
             return False

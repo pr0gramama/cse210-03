@@ -32,9 +32,7 @@ class Director:
         self.last_guess = ""  # most recent letter guessed by user
         # SEE Matcher function outcome.  This may be a problem.
         self.outcome = None
-        self.won = ""
-        self.lose = ""
-        self._get_match = False
+        self._lives = 5
 
     def start_game(self):
         """Starts the game by running the main game loop.
@@ -42,8 +40,10 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
+        print("\n The word has as many letters as the hyphens:")
+        self._unknown_word = self._matcher.set_hyphens()
         self._sketcher.set_parachute(0)
-        while self._is_playing:
+        while self._is_playing and self._lives > 0:
             self._get_inputs()
             self._do_updates()
             self._do_outputs()
@@ -54,12 +54,6 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        self._unknown_word = self._matcher.set_hyphens()
-        print("The spaces are the number of letters:")
-        for i in self._unknown_word:
-            strip_quotes = i.strip()
-            print(strip_quotes, end=" ")
-        print()
         self.last_guess = self._sketcher.make_guess()
         self._matcher.get_word(self.last_guess)
 
@@ -69,16 +63,14 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-
-        
-        # print(self._unknown_word)
-        print(self._matcher._word) #it is only for control. Yuu can clean it
+        self._unknown_word = self._matcher.set_hyphens()
+        print()
+        # print(self._matcher._word) #it is only for control. Yuu can erase it
         self._matcher.is_found(self._sketcher.guess)
         if self._matcher.match:
             self._matcher.match = False
         else:
             self._wrong_guess += 1
-        
         self._sketcher.set_parachute(self._wrong_guess)
 
     def _do_outputs(self):
@@ -87,13 +79,6 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        result = self._get_match()
-        if result:
-            self.won = "You Win!"
-            self._terminal_service.write_text(self.won)
-        else:
-            self.won = "You lose."
-
         self._is_playing = (self._matcher.outcome(
             self._wrong_guess, self._unknown_word) == None)
         if self._is_playing == False:
